@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using VideoCollection.DataAccess.EfConfiguration;
-using VideoCollection.DataAccess.Repositories;
-using VideoCollection.Infrastructure.Repositories;
+using VideoCollection.DataAccess;
+using VideoCollection.Infrastructure;
+using VideoCollection.WebApi.Services;
 
 namespace VideoCollection.WebApi
 {
@@ -27,14 +20,14 @@ namespace VideoCollection.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<VideoCollectionDbContext>(options => options.UseSqlServer(connectionString));
+//            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+//            services.AddDbContext<MoviesDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddMvc();
 
-            services.AddScoped<IMovieRepository, MovieRepository>();
-            services.AddScoped<IActorRepository, ActorRepository>();
-            services.AddScoped<IDirectorRepository, DirectorRepository>();
+            services.AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<MovieService, MovieService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
