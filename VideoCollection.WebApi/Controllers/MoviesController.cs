@@ -33,14 +33,15 @@ namespace VideoCollection.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody] Movie movie)
         {
-            _movieService.UpdateMovie(movie);
+            _movieService.AddMovie(movie);
         }
 
         // PUT api/movies/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Movie movie)
         {
-            _movieService.AddMovie(movie);
+            movie.Id = id;
+            _movieService.UpdateMovie(movie);
         }
 
         // DELETE api/movies/5

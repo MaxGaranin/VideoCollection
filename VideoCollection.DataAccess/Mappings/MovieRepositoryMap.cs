@@ -9,7 +9,6 @@ namespace VideoCollection.DataAccess.Mappings
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
             builder.HasKey(t => t.Id);
-            builder.HasMany(t => t.Actors);
             builder.HasOne(t => t.Director);
         }
     }
@@ -19,6 +18,24 @@ namespace VideoCollection.DataAccess.Mappings
         public void Configure(EntityTypeBuilder<Actor> builder)
         {
             builder.HasKey(t => t.Id);
+        }
+    }
+
+    public class MovieActorRepositoryMap : IEntityTypeConfiguration<MovieActor>
+    {
+        public void Configure(EntityTypeBuilder<MovieActor> builder)
+        {
+            builder.HasKey(t => new {t.MovieId, t.ActorId});
+
+            builder
+                .HasOne(t => t.Movie)
+                .WithMany(m => m.MovieActors)
+                .HasForeignKey(m => m.MovieId);
+
+            builder
+                .HasOne(t => t.Actor)
+                .WithMany(m => m.MovieActors)
+                .HasForeignKey(m => m.ActorId);
         }
     }
 

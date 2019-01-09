@@ -12,7 +12,7 @@ namespace VideoCollection.DataAccess.EfConfiguration
         MoviesDbContext IDesignTimeDbContextFactory<MoviesDbContext>.CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<MoviesDbContext>();
-            optionsBuilder.UseSqlServer("@\"Server=(localdb)\\mssqllocaldb;Database=VideoCollection;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=VideoCollection;Trusted_Connection=True;");
 
             return new MoviesDbContext(optionsBuilder.Options);
         }
@@ -37,6 +37,9 @@ namespace VideoCollection.DataAccess.EfConfiguration
 
         private static void CreateMappings(ModelBuilder modelBuilder)
         {
+            // Почему-то это работает только здесь, а не в отдельном классе
+            modelBuilder.Entity<MovieActor>().HasKey(t => new {t.MovieId, t.ActorId});
+
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => !string.IsNullOrEmpty(type.Namespace))
                 .Where(type => type.BaseType != null &&

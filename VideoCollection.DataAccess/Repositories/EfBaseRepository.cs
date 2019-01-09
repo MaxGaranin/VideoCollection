@@ -36,8 +36,10 @@ namespace VideoCollection.DataAccess.Repositories
                 T entity1 = DbSet.Find(entity.Id);
                 DbContext.Entry(entity1).CurrentValues.SetValues(entity);
             }
-
-            dbEntityEntry.State = EntityState.Modified;
+            else
+            {
+                dbEntityEntry.State = EntityState.Modified;
+            }
 
             DbContext.SaveChanges();
         }

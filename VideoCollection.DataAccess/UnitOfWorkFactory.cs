@@ -16,7 +16,8 @@ namespace VideoCollection.DataAccess
 
         public IUnitOfWork Create()
         {
-            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+//            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=VideoCollection;Trusted_Connection=True;";
 
             var builder = new DbContextOptionsBuilder<MoviesDbContext>();
             builder.UseSqlServer(connectionString);
