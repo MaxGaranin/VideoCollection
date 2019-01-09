@@ -1,4 +1,4 @@
-﻿namespace VideoCollection.Infrastructure
+﻿namespace VideoCollection.Model.DataAccess
 {
     public interface IUnitOfWorkFactory
     {

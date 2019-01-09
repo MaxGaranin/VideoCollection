@@ -1,7 +1,6 @@
 ﻿using VideoCollection.DataAccess.EfConfiguration;
 using VideoCollection.DataAccess.Repositories;
-using VideoCollection.Infrastructure;
-using VideoCollection.Infrastructure.Repositories;
+using VideoCollection.Model.DataAccess;
 
 namespace VideoCollection.DataAccess
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VideoCollection.Infrastructure.Repositories;
+using VideoCollection.Model.DataAccess;
 using VideoCollection.Model.Entities;
 
 namespace VideoCollection.DataAccess.Repositories

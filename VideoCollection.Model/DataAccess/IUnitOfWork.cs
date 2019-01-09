@@ -1,7 +1,6 @@
 ﻿using System;
-using VideoCollection.Infrastructure.Repositories;
 
-namespace VideoCollection.Infrastructure
+namespace VideoCollection.Model.DataAccess
 {
     public interface IUnitOfWork : IDisposable
     {

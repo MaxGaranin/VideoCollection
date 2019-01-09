@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VideoCollection.DataAccess;
 using VideoCollection.Infrastructure;
 using VideoCollection.WebApi.Services;
 
@@ -22,9 +21,8 @@ namespace VideoCollection.WebApi
         {
             services.AddMvc();
 
-            services.AddScoped<IUnitOfWorkFactory, UnitOfWorkFactory>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<MovieService, MovieService>();
+            UnitOfWorkInitializer.Initialize(services);
+            services.AddScoped<MovieService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

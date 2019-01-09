@@ -1,27 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using VideoCollection.DataAccess.EfConfiguration;
-using VideoCollection.Infrastructure;
+using VideoCollection.Model.DataAccess;
 
 namespace VideoCollection.DataAccess
 {
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
-        private readonly IConfiguration _configuration;
+        private readonly DbContextOptionsBuilder _builder;
 
         public UnitOfWorkFactory(IConfiguration configuration)
         {
-            _configuration = configuration;
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            _builder = new DbContextOptionsBuilder<MoviesDbContext>();
+            _builder.UseSqlServer(connectionString);
         }
 
         public IUnitOfWork Create()
         {
-            var connectionString = _configuration.GetConnectionString("DefaultConnection");
-
-            var builder = new DbContextOptionsBuilder<MoviesDbContext>();
-            builder.UseSqlServer(connectionString);
-
-            var dbContext = new MoviesDbContext(builder.Options);
+            var dbContext = new MoviesDbContext(_builder.Options);
             var uow = new UnitOfWork(dbContext);
             return uow;
         }

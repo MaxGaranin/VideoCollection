@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VideoCollection.DataAccess\VideoCollection.DataAccess.csproj" />
     <ProjectReference Include="..\VideoCollection.Infrastructure\VideoCollection.Infrastructure.csproj" />
     <ProjectReference Include="..\VideoCollection.Model\VideoCollection.Model.csproj" />
   </ItemGroup>

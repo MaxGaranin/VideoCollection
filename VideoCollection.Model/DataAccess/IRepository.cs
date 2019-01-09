@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using VideoCollection.Model.Entities;
 
-namespace VideoCollection.Infrastructure.Repositories
+namespace VideoCollection.Model.DataAccess
 {
     public interface IRepository<T, in TKey> : IDisposable
         where T : class, IEntity<TKey>, new()

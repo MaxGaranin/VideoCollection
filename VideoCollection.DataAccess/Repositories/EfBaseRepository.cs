@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using VideoCollection.Infrastructure.Repositories;
+using VideoCollection.Model.DataAccess;
 using VideoCollection.Model.Entities;
 
 namespace VideoCollection.DataAccess.Repositories

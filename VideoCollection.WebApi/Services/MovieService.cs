@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VideoCollection.Infrastructure;
+using VideoCollection.Model.DataAccess;
 using VideoCollection.Model.Entities;
 
 namespace VideoCollection.WebApi.Services
