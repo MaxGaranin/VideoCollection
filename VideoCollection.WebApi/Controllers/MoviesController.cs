@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using VideoCollection.Model.Entities;
 using VideoCollection.WebApi.Services;
+using VideoCollection.WebApi.ViewModels;
 
 namespace VideoCollection.WebApi.Controllers
 {
@@ -17,9 +19,15 @@ namespace VideoCollection.WebApi.Controllers
 
         // GET api/movies
         [HttpGet]
-        public IEnumerable<Movie> Index()
+        public MovieContainer Index(int page, string sortBy, string searchStr)
         {
-            return _movieService.GetMovies();
+            var movies = _movieService.GetMovies(page, sortBy, searchStr);
+
+            return new MovieContainer
+            {
+                MoviesCount = movies.Count, 
+                Movies = movies
+            };
         }
 
         // GET api/movies/5

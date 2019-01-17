@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoCollection.Model", "Vi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoCollection.DataAccess", "VideoCollection.DataAccess\VideoCollection.DataAccess.csproj", "{0BD2B93F-9C6C-4ADC-AE17-530C7ACEFAAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoCollection.Infrastructure", "VideoCollection.Infrastructure\VideoCollection.Infrastructure.csproj", "{26C29AD3-3797-4E62-8578-DD1B48392D6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VideoCollection.Infrastructure", "VideoCollection.Infrastructure\VideoCollection.Infrastructure.csproj", "{26C29AD3-3797-4E62-8578-DD1B48392D6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoCollection.DataAccess.Tests", "VideoCollection.DataAccess.Tests\VideoCollection.DataAccess.Tests.csproj", "{5D89BE82-EF91-4AE8-9802-7FF640F6CD96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{26C29AD3-3797-4E62-8578-DD1B48392D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26C29AD3-3797-4E62-8578-DD1B48392D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26C29AD3-3797-4E62-8578-DD1B48392D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D89BE82-EF91-4AE8-9802-7FF640F6CD96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D89BE82-EF91-4AE8-9802-7FF640F6CD96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D89BE82-EF91-4AE8-9802-7FF640F6CD96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D89BE82-EF91-4AE8-9802-7FF640F6CD96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

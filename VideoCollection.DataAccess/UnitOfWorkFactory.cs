@@ -14,7 +14,9 @@ namespace VideoCollection.DataAccess
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             _builder = new DbContextOptionsBuilder<MoviesDbContext>();
-            _builder.UseSqlServer(connectionString);
+            _builder
+                .UseLazyLoadingProxies()
+                .UseSqlServer(connectionString);
         }
 
         public IUnitOfWork Create()

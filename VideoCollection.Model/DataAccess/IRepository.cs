@@ -15,7 +15,12 @@ namespace VideoCollection.Model.DataAccess
         T Get(TKey id);
         T Find(Expression<Func<T, bool>> predicate);
         IEnumerable<T> GetAll();
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate);
+
+        IEnumerable<T> FindAll<TOrderKey>(
+            Expression<Func<T, bool>> predicate = null,
+            Expression<Func<T, TOrderKey>> orderBy = null,
+            int? skip = null,
+            int? take = null);
     }
 
     public interface IMovieRepository : IRepository<Movie, int>

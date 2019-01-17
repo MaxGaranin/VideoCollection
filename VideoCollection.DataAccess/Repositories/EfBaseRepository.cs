@@ -76,9 +76,19 @@ namespace VideoCollection.DataAccess.Repositories
             return DbSet.AsEnumerable();
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate)
+        public IEnumerable<T> FindAll<TOrderKey>(
+            Expression<Func<T, bool>> predicate = null,
+            Expression<Func<T, TOrderKey>> orderBy = null,
+            int? skip = null,
+            int? take = null)
         {
-            return DbSet.Where(predicate).AsEnumerable();
+            var query = DbSet.AsQueryable();
+            if (predicate != null) query = query.Where(predicate);
+            if (orderBy != null) query = query.OrderBy(orderBy);
+            if (skip != null) query = query.Skip(skip.Value);
+            if (take != null) query = query.Take(take.Value);
+
+            return query;
         }
 
         public void Dispose()

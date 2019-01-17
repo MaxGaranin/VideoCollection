@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VideoCollection.Model.Entities;
 
 namespace VideoCollection.DataAccess.Mappings
@@ -10,6 +13,15 @@ namespace VideoCollection.DataAccess.Mappings
         {
             builder.HasKey(t => t.Id);
             builder.HasOne(t => t.Director);
+
+            var genresConverter = new ValueConverter<Genre[], string>(
+                v => string.Join(',', v),
+                s => s.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(Enum.Parse<Genre>)
+                    .ToArray()
+            );
+
+            builder.Property(t => t.Genres).HasConversion(genresConverter);
         }
     }
 

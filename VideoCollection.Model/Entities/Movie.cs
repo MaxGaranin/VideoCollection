@@ -7,7 +7,7 @@ namespace VideoCollection.Model.Entities
         public string Title { get; set; }
         public int Year { get; set; }
         public int Runtime { get; set; }
-        public Genre Genre { get; set; }
+        public Genre[] Genres { get; set; }
         public string Plot { get; set; }
         public string PosterUrl { get; set; }
         
@@ -18,10 +18,10 @@ namespace VideoCollection.Model.Entities
     public class MovieActor
     {
         public int MovieId { get; set; }
-        public Movie Movie { get; set; }
+        public virtual Movie Movie { get; set; }
 
         public int ActorId { get; set; }
-        public Actor Actor { get; set; }
+        public virtual Actor Actor { get; set; }
     }
 
     public class Person : Entity<int>
@@ -61,6 +61,6 @@ namespace VideoCollection.Model.Entities
         Western,
         Horror,
         Musical,
-        Sport
+        Sport,
     }
 }

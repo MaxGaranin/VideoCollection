@@ -3,6 +3,8 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using VideoCollection.DataAccess.Utils;
 using VideoCollection.Model.Entities;
 
 namespace VideoCollection.DataAccess.EfConfiguration
@@ -12,7 +14,9 @@ namespace VideoCollection.DataAccess.EfConfiguration
         MoviesDbContext IDesignTimeDbContextFactory<MoviesDbContext>.CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<MoviesDbContext>();
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=VideoCollection;Trusted_Connection=True;");
+            optionsBuilder
+                .UseLazyLoadingProxies()
+                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=VideoCollection;Trusted_Connection=True;");
 
             return new MoviesDbContext(optionsBuilder.Options);
         }
@@ -22,6 +26,7 @@ namespace VideoCollection.DataAccess.EfConfiguration
     {
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Actor> Actors { get; set; }
+        public DbSet<MovieActor> MovieActor { get; set; }
         public DbSet<Director> Directors { get; set; }
 
         public MoviesDbContext(DbContextOptions options) : base(options)
@@ -37,15 +42,8 @@ namespace VideoCollection.DataAccess.EfConfiguration
 
         private static void CreateMappings(ModelBuilder modelBuilder)
         {
-            // Почему-то это работает только здесь, а не в отдельном классе
-            modelBuilder.Entity<MovieActor>().HasKey(t => new {t.MovieId, t.ActorId});
-
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(type => !string.IsNullOrEmpty(type.Namespace))
-                .Where(type => type.BaseType != null &&
-                               type.BaseType.IsGenericType &&
-                               type.BaseType.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)
-                );
+                .Where(type => ReflectionsUtils.IsAssignableToGenericType(type, typeof(IEntityTypeConfiguration<>)));
 
             foreach (var type in typesToRegister)
             {
